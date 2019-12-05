@@ -4,12 +4,20 @@ import TaskCount from './TaskCount';
 
 describe('TaskCount', () => {
 
-    it('should render 2 TaskCount', () => {
+    it('should render 2 items', () => {
         const wrapper = shallow(
             <TaskCount count={2}/>
         );
 
-        expect(wrapper.html()).toEqual("<h3>Task list / 2 items</h3>");
+        expect(wrapper.html()).toEqual("2 items");
+    });
+
+    it('should render 1 item', () => {
+        const wrapper = shallow(
+            <TaskCount count={1}/>
+        );
+
+        expect(wrapper.html()).toEqual("1 item");
     });
 
     it('should`n render TaskCount', () => {
