@@ -1,5 +1,6 @@
 import React from 'react';
 import TaskCount from './TaskCount';
+import withTasks from '../../../Context/Tasks/withTasks';
 
 /**
  * @interface Props
@@ -12,13 +13,13 @@ interface Props {
  * @return {any}
  * @constructor
  */
-const TaskInfo: React.FC<Props> = (): any => {
+const TaskInfo: React.FC<Props> = withTasks(({tasks}): any => {
     return (
         <header>
             <div className="row justify-content-between">
                 <div className="col-xs p-3">
                     <h5>
-                        TaskList / <TaskCount count={1} />
+                        TaskList <TaskCount count={tasks.length} />
                     </h5>
 
                 </div>
@@ -28,6 +29,6 @@ const TaskInfo: React.FC<Props> = (): any => {
             </div>
         </header>
     );
-};
+});
 
 export default TaskInfo;
