@@ -1,6 +1,7 @@
 import React from 'react';
 
-import './scss/tasks.scss';
+import '../../../scss/tasks.scss';
+import TaskInfo from './TaskInfo';
 
 /**
  * @interface Props
@@ -11,9 +12,9 @@ interface Props {
 
 const Tasks: React.FC<Props> = ({}) => {
     return (
-        <>
-<div><span>todos</span></div>
-        </>
+        <div className="container">
+            <TaskInfo />
+        </div>
     );
 };
 
