@@ -15,7 +15,7 @@ interface Props {
  */
 const TaskCount: React.FC<Props> = ({ count }): any => {
     return (count > 0) && (
-        <>{count}{' '}{pluralization(count, 'item|items')}</>
+        <>/{' '}{count}{' '}{pluralization(count, 'item|items')}</>
     );
 };
 
