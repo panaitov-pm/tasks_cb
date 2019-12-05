@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Tasks from './Tasks';
+import Tasks from './View/Section/Tasks';
 import * as serviceWorker from './serviceWorker';
 
 import './scss/app.scss';
