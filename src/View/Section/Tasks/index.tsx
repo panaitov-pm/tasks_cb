@@ -10,7 +10,11 @@ interface Props {
 
 }
 
-const Tasks: React.FC<Props> = ({}) => {
+/**
+ * @return {any}
+ * @constructor
+ */
+const Tasks: React.FC<Props> = () => {
     return (
         <div className="container">
             <TaskInfo />
