@@ -39,7 +39,7 @@ const Tasks: React.FC<Props> = () => {
                     title="New Task"
                     task={{
                         id: uuidV4(),
-                        name: 'sss',
+                        name: '',
                         description: ''
                     }}
                     onRequestClose={() => setIsOpenTaskModal(false)}

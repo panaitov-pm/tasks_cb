@@ -1,8 +1,10 @@
 import * as React from 'react';
-import { memo, useEffect, useState } from 'react';
+import { FormEvent, useEffect, useMemo, useState } from 'react';
+import classNames from 'classnames';
 import ITask from '../../../../Types/Tasks/Task';
 import MainModal, { MainModalProps } from '../../../Modules/Modal/MainModal';
 import setObjectItem from '../../../../Helper/Object/setObjectItem';
+import withTasks from '../../../../Context/Tasks/withTasks';
 
 /**
  * @interface Props
@@ -19,16 +21,26 @@ interface Props extends MainModalProps {
  * @return {any}
  * @constructor
  */
-const TaskModal: React.FC<Props> = ({ title, task, ...props }): any => {
+const TaskModal: React.FC<Props> = withTasks(({ title, task, addTask, ...props }): any => {
 
     const [taskInfo, setTaskInfo] = useState(task);
+    const [hasError, setHasError] = useState(false);
 
     // Set modal Task if props Task was changed during opening modal window
     useEffect(() => {
         props.isOpen && setTaskInfo(task);
-    }, [task]);
+    }, [task, props.isOpen]);
 
-    return (
+    /**
+     * @param {React.FormEvent<HTMLFontElement>} event
+     * @param {ITask} task
+     */
+    const onSubmit = (event: FormEvent<HTMLFormElement>, task: ITask): void => {
+        event.preventDefault();
+        addTask(task);
+    };
+
+    return useMemo(() => (
         <MainModal
             {...props}
         >
@@ -42,7 +54,13 @@ const TaskModal: React.FC<Props> = ({ title, task, ...props }): any => {
                     </button>
                 </div>
                 <div className="modal-body">
-                    <form className="" id="task-form" noValidate={true}>
+                    <form
+                        onSubmit={(event) => onSubmit(event, taskInfo)}
+                        className={classNames('', {
+                            'was-validated': hasError
+                        })}
+                        id="task-form"
+                        noValidate={true}>
                         <div className="form-group">
                             <label htmlFor="task-name" className="col-form-label">Name:</label>
                             <input
@@ -51,7 +69,9 @@ const TaskModal: React.FC<Props> = ({ title, task, ...props }): any => {
                                 id="task-name"
                                 placeholder="Enter Name"
                                 value={taskInfo.name}
-                                onChange={({ target }) => setTaskInfo(setObjectItem(taskInfo, { name: target.value }))}
+                                onChange={({ target }) => {
+                                    setTaskInfo(setObjectItem(taskInfo, { name: target.value }))
+                                }}
                                 required={true}
                             />
                             <div className="invalid-feedback">
@@ -65,7 +85,9 @@ const TaskModal: React.FC<Props> = ({ title, task, ...props }): any => {
                                 id="task-description"
                                 placeholder="Enter Description"
                                 value={taskInfo.description}
-                                onChange={({ target }) => setTaskInfo(setObjectItem(taskInfo, { description: target.value }))}
+                                onChange={({ target }) => {
+                                    setTaskInfo(setObjectItem(taskInfo, { description: target.value }))
+                                }}
                                 required={true}
                             />
                             <div className="invalid-feedback">
@@ -82,11 +104,17 @@ const TaskModal: React.FC<Props> = ({ title, task, ...props }): any => {
                     >
                         Cancel
                     </button>
-                    <button type="submit" form="task-form" className="btn btn-primary">Saves</button>
+                    <button
+                        type="submit"
+                        form="task-form"
+                        className="btn btn-primary"
+                    >
+                        Saves
+                    </button>
                 </div>
             </div>
         </MainModal>
-    );
-};
+    ), [props, title, hasError, taskInfo]);
+});
 
-export default memo(TaskModal);
+export default TaskModal;
