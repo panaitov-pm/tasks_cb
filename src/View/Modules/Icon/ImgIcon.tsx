@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { memo } from 'react';
+import classNames from 'classnames';
 
 /**
  * @interface Props
@@ -13,7 +14,7 @@ interface Props {
 const ImgIcon: React.FC<Props> = ({ src, alt, className }) => {
     return (
         <img
-            className={className}
+            className={classNames('img-icon', [className])}
             src={src}
             alt={alt} />
     );

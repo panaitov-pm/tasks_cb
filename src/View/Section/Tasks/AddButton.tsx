@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { memo } from 'react';
+import React, { memo } from 'react';
 import ImgIcon from '../../Modules/Icon/ImgIcon';
 import classNames from 'classnames';
 
@@ -16,13 +15,13 @@ const AddButton: React.FC<Props> = ({ title, onClick, className }): any => {
     return (
         <button
             type="button"
-            className={classNames('d-flex align-items-center btn', [className])}
+            className={classNames('d-flex align-items-center btn btn-icon', [className])}
             aria-label={title}
             onClick={onClick}
         >
             <span>{title}</span>
             <ImgIcon
-                className="img-icon ml-2"
+                className="ml-2"
                 src="/icons/plus.png"
                 alt={title}
             />
