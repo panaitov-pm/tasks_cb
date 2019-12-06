@@ -3,6 +3,7 @@ import React from 'react';
 import '../../../scss/tasks.scss';
 import TaskInfo from './TaskInfo';
 import TasksStore from '../../../Context/Tasks/TasksStore';
+import TaskList from './TaskList';
 
 /**
  * @interface Props
@@ -22,6 +23,7 @@ const Tasks: React.FC<Props> = () => {
                 getDefaultProps={() => ({})}
             >
                 <TaskInfo />
+                <TaskList />
             </TasksStore>
 
         </div>
