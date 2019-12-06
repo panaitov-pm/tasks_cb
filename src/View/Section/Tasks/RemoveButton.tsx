@@ -11,6 +11,13 @@ interface Props {
     className?: string;
 }
 
+/**
+ * @param {string} title
+ * @param {() => void} onClick
+ * @param {string | undefined} className
+ * @return {any}
+ * @constructor
+ */
 const RemoveButton: React.FC<Props> = ({ title, onClick, className }): any => {
     return (
         <button
