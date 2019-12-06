@@ -5,6 +5,7 @@ import ITask from '../../../../Types/Tasks/Task';
 import MainModal, { MainModalProps } from '../../../Modules/Modal/MainModal';
 import setObjectItem from '../../../../Helper/Object/setObjectItem';
 import withTasks from '../../../../Context/Tasks/withTasks';
+import hasError from '../../../../Helper/Error/hasError';
 
 /**
  * @interface Props
@@ -24,7 +25,7 @@ interface Props extends MainModalProps {
 const TaskModal: React.FC<Props> = withTasks(({ title, task, addTask, ...props }): any => {
 
     const [taskInfo, setTaskInfo] = useState(task);
-    const [hasError, setHasError] = useState(false);
+    const [isError, setIsError] = useState(false);
 
     // Set modal Task if props Task was changed during opening modal window
     useEffect(() => {
@@ -37,6 +38,12 @@ const TaskModal: React.FC<Props> = withTasks(({ title, task, addTask, ...props }
      */
     const onSubmit = (event: FormEvent<HTMLFormElement>, task: ITask): void => {
         event.preventDefault();
+        if(hasError<ITask>(taskInfo)) {
+        	setIsError(true);
+        	return;
+        }
+
+        setIsError(false);
         addTask(task);
     };
 
@@ -57,7 +64,7 @@ const TaskModal: React.FC<Props> = withTasks(({ title, task, addTask, ...props }
                     <form
                         onSubmit={(event) => onSubmit(event, taskInfo)}
                         className={classNames('', {
-                            'was-validated': hasError
+                            'was-validated': isError
                         })}
                         id="task-form"
                         noValidate={true}>
@@ -114,7 +121,7 @@ const TaskModal: React.FC<Props> = withTasks(({ title, task, addTask, ...props }
                 </div>
             </div>
         </MainModal>
-    ), [props, title, hasError, taskInfo]);
+    ), [props, title, isError, taskInfo]);
 });
 
 export default TaskModal;
