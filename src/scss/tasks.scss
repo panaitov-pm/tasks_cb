@@ -1,1 +1,15 @@
+.img-icon {
+    width: 15px;
+    height: 15px;
+}
 
+.btn-icon {
+
+    &:hover {
+        opacity: .7;
+    }
+
+    &.btn {
+        transition: opacity 0.3s ease-in-out;
+    }
+}
