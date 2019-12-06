@@ -1,12 +1,12 @@
 import { createContext } from 'react';
-import Task from '../../Types/Tasks/Task';
+import ITask from '../../Types/Tasks/Task';
 
 /**
  * @interface TasksContextProps
  */
 export interface TasksContextProps {
-    tasks: Task[];
-    addTask: (task: Task) => void;
+    tasks: ITask[];
+    addTask: (task: ITask) => void;
 }
 
 /**
