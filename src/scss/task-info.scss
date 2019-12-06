@@ -1,18 +1,7 @@
-.task-info {
-    &__btn {
+.task-info__btn {
 
-
-        &:hover {
-            opacity: .7;
-        }
-
-        &.btn {
-            transition: opacity 0.3s ease-in-out;
-        }
-
-        .img-icon {
-            width: 24px;
-            height: 24px;
-        }
+    .img-icon {
+        width: 24px;
+        height: 24px;
     }
 }
