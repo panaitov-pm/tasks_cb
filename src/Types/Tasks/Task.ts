@@ -1,8 +1,8 @@
 /**
- * @interface Task
+ * @interface ITask
  */
-export default interface Task {
+export default interface ITask {
     id: string;
     name: string;
-    description?: string;
+    description: string;
 }
