@@ -9,7 +9,7 @@ describe('TaskCount', () => {
             <TaskCount count={2}/>
         );
 
-        expect(wrapper.html()).toEqual("2 items");
+        expect(wrapper.html()).toEqual("/ 2 items");
     });
 
     it('should render 1 item', () => {
@@ -17,7 +17,7 @@ describe('TaskCount', () => {
             <TaskCount count={1}/>
         );
 
-        expect(wrapper.html()).toEqual("1 item");
+        expect(wrapper.html()).toEqual("/ 1 item");
     });
 
     it('should`n render TaskCount', () => {
