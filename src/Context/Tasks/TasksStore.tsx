@@ -2,6 +2,7 @@ import React, { Reducer, useContext, useReducer } from 'react';
 
 import TasksContext, { TasksContextProps } from './TasksContext';
 import ITask from '../../Types/Tasks/Task';
+import setItem from '../../Helper/Storage/saveItem';
 
 /**
  * @interface Props
@@ -79,8 +80,10 @@ const TasksStore: React.FC<Props> = ({ children, getDefaultProps }) => {
         editTask: (task: ITask) => dispatch({ type: TaskActions.EDIT_TASK, task }),
         removeTask: (taskId: string) => dispatch({ type: TaskActions.REMOVE_TASK, taskId }),
 
-        ...getDefaultProps,
+        ...getDefaultProps(),
     });
+
+    setItem('tasks', JSON.stringify(state.tasks));
 
     return (
         <TasksContext.Provider value={{ ...state, ...getDefaultProps() }}>
