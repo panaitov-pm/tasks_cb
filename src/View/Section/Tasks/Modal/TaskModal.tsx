@@ -115,6 +115,7 @@ const TaskModal: React.FC<Props> = withTasks(({ title, task, addTask, ...props }
                         type="submit"
                         form="task-form"
                         className="btn btn-primary"
+                        onClick={props.onRequestClose}
                     >
                         Saves
                     </button>
