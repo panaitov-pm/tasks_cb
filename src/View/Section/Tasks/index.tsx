@@ -6,6 +6,7 @@ import TaskInfo from './TaskInfo';
 import TasksStore, { TaskActions } from '../../../Context/Tasks/TasksStore';
 import TaskList from './TaskList';
 import TaskModal from './Modal/TaskModal';
+import getItem from '../../../Helper/Storage/getItem';
 
 
 /**
@@ -26,7 +27,7 @@ const Tasks: React.FC<Props> = () => {
     return (
         <div className="container">
             <TasksStore
-                getDefaultProps={() => ({})}
+                getDefaultProps={() => ({tasks: getItem('tasks', [])})}
             >
                 <TaskInfo
                     setIsOpenTaskModal={setIsOpenTaskModal}
