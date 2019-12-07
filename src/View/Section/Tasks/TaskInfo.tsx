@@ -36,7 +36,7 @@ const TaskInfo: React.FC<Props> = withTasks(({ tasks, setIsOpenTaskModal }): any
                 </div>
             </div>
         </header>
-    ), [setIsOpenTaskModal, tasks.length]);
+    ), [tasks.length]);
 });
 
 export default TaskInfo;
