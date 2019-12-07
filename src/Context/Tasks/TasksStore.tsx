@@ -10,6 +10,12 @@ interface Props {
     getDefaultProps: () => Partial<TasksContextProps>;
 }
 
+export enum TaskActions {
+    ADD_TASK = 'ADD_TASK',
+    EDIT_TASK = 'EDIT_TASK',
+    REMOVE_TASK = 'REMOVE_TASK',
+}
+
 /**
  * @interface Action
  */
@@ -26,7 +32,7 @@ interface Action {
  */
 const reducer: Reducer<TasksContextProps, Action> = (prevState, action): TasksContextProps => {
     switch (action.type) {
-        case 'ADD_TASK':
+        case TaskActions.ADD_TASK:
             return {
                 ...prevState,
                 tasks: [
@@ -34,7 +40,19 @@ const reducer: Reducer<TasksContextProps, Action> = (prevState, action): TasksCo
                     ...prevState.tasks
                 ],
             };
-        case 'REMOVE_TASK':
+        case TaskActions.EDIT_TASK:
+            return {
+                ...prevState,
+                tasks: prevState.tasks.map(task => {
+                    if (task.id !== action.task.id) return task;
+
+                    return {
+                        ...task,
+                        ...action.task,
+                    };
+                }),
+            };
+        case TaskActions.REMOVE_TASK:
             return {
                 ...prevState,
                 tasks: prevState.tasks.filter(task => task.id !== action.taskId)
@@ -57,8 +75,9 @@ const TasksStore: React.FC<Props> = ({ children, getDefaultProps }) => {
     const [state, dispatch] = useReducer(reducer, {
         ...tasks,
 
-        addTask: (task: ITask) => dispatch({ type: 'ADD_TASK', task }),
-        removeTask: (taskId: string) => dispatch({ type: 'REMOVE_TASK', taskId }),
+        addTask: (task: ITask) => dispatch({ type: TaskActions.ADD_TASK, task }),
+        editTask: (task: ITask) => dispatch({ type: TaskActions.EDIT_TASK, task }),
+        removeTask: (taskId: string) => dispatch({ type: TaskActions.REMOVE_TASK, taskId }),
 
         ...getDefaultProps,
     });

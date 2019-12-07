@@ -6,6 +6,7 @@ import MainModal, { MainModalProps } from '../../../Modules/Modal/MainModal';
 import setObjectItem from '../../../../Helper/Object/setObjectItem';
 import withTasks from '../../../../Context/Tasks/withTasks';
 import hasError from '../../../../Helper/Error/hasError';
+import { TaskActions } from '../../../../Context/Tasks/TasksStore';
 
 /**
  * @interface Props
@@ -13,6 +14,7 @@ import hasError from '../../../../Helper/Error/hasError';
 interface Props extends MainModalProps {
     title: string;
     task: ITask;
+    action: Partial<TaskActions>;
     closeTaskModal: () => void;
 }
 
@@ -23,7 +25,7 @@ interface Props extends MainModalProps {
  * @return {any}
  * @constructor
  */
-const TaskModal: React.FC<Props> = withTasks(({ title, task, addTask, closeTaskModal, ...props }): any => {
+const TaskModal: React.FC<Props> = withTasks(({ title, task, action, addTask, editTask, closeTaskModal, ...props }): any => {
 
     const [taskInfo, setTaskInfo] = useState(task);
     const [isError, setIsError] = useState(false);
@@ -36,18 +38,34 @@ const TaskModal: React.FC<Props> = withTasks(({ title, task, addTask, closeTaskM
     }, [task, props.isOpen]);
 
     /**
-     * @param {React.FormEvent<HTMLFontElement>} event
-     * @param {ITask} task
+     * @param {TaskActions} action
+     * @param {ITask} newTask
      */
-    const onSubmit = (event: FormEvent<HTMLFormElement>, task: ITask): void => {
+    const getTaskAction = (action: TaskActions, newTask: ITask) => {
+        if (action === TaskActions.ADD_TASK) {
+            addTask(newTask);
+        }
+
+        if (action === TaskActions.EDIT_TASK) {
+            editTask(newTask)
+        }
+    };
+
+    /**
+     * @param {React.FormEvent<HTMLFontElement>} event
+     * @param newTask
+     */
+    const onSubmit = (event: FormEvent<HTMLFormElement>, newTask: ITask): void => {
         event.preventDefault();
         if (hasError<ITask>(taskInfo)) {
             setIsError(true);
             return;
         }
 
+        getTaskAction(action, newTask);
+
         setIsError(false);
-        addTask(task);
+
         closeTaskModal();
     };
 

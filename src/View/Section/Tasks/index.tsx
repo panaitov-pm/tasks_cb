@@ -3,7 +3,7 @@ import uuidV4 from 'uuid/v4';
 
 import '../../../scss/tasks.scss';
 import TaskInfo from './TaskInfo';
-import TasksStore from '../../../Context/Tasks/TasksStore';
+import TasksStore, { TaskActions } from '../../../Context/Tasks/TasksStore';
 import TaskList from './TaskList';
 import TaskModal from './Modal/TaskModal';
 
@@ -37,6 +37,7 @@ const Tasks: React.FC<Props> = () => {
                 <TaskModal
                     isOpen={isOpenTaskModal}
                     title="New Task"
+                    action={TaskActions.ADD_TASK}
                     task={{
                         id: uuidV4(),
                         name: '',
