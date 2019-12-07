@@ -15,8 +15,10 @@ export interface TasksContextProps {
  */
 const TasksContext = createContext<TasksContextProps>({
     tasks: [],
-    addTask: () => {},
-    removeTask: () => {},
+    addTask: () => {
+    },
+    removeTask: () => {
+    },
 });
 
 export default TasksContext;

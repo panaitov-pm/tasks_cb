@@ -13,6 +13,7 @@ import hasError from '../../../../Helper/Error/hasError';
 interface Props extends MainModalProps {
     title: string;
     task: ITask;
+    closeTaskModal: () => void;
 }
 
 /**
@@ -22,7 +23,7 @@ interface Props extends MainModalProps {
  * @return {any}
  * @constructor
  */
-const TaskModal: React.FC<Props> = withTasks(({ title, task, addTask, ...props }): any => {
+const TaskModal: React.FC<Props> = withTasks(({ title, task, addTask, closeTaskModal, ...props }): any => {
 
     const [taskInfo, setTaskInfo] = useState(task);
     const [isError, setIsError] = useState(false);
@@ -30,6 +31,8 @@ const TaskModal: React.FC<Props> = withTasks(({ title, task, addTask, ...props }
     // Set modal Task if props Task was changed during opening modal window
     useEffect(() => {
         props.isOpen && setTaskInfo(task);
+
+        return () => setIsError(false);
     }, [task, props.isOpen]);
 
     /**
@@ -45,6 +48,7 @@ const TaskModal: React.FC<Props> = withTasks(({ title, task, addTask, ...props }
 
         setIsError(false);
         addTask(task);
+        closeTaskModal();
     };
 
     return useMemo(() => (
@@ -55,7 +59,7 @@ const TaskModal: React.FC<Props> = withTasks(({ title, task, addTask, ...props }
                 <div className="modal-header">
                     <h5 className="modal-title">{title}</h5>
                     <button
-                        onClick={props.onRequestClose}
+                        onClick={closeTaskModal}
                         type="button" className="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -107,7 +111,7 @@ const TaskModal: React.FC<Props> = withTasks(({ title, task, addTask, ...props }
                     <button
                         type="button"
                         className="btn btn-secondary"
-                        onClick={props.onRequestClose}
+                        onClick={closeTaskModal}
                     >
                         Cancel
                     </button>
@@ -115,14 +119,13 @@ const TaskModal: React.FC<Props> = withTasks(({ title, task, addTask, ...props }
                         type="submit"
                         form="task-form"
                         className="btn btn-primary"
-                        onClick={props.onRequestClose}
                     >
-                        Saves
+                        Save
                     </button>
                 </div>
             </div>
         </MainModal>
-    ), [props, title, isError, taskInfo, onSubmit]);
+    ), [props, title, isError]);
 });
 
 export default TaskModal;

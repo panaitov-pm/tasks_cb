@@ -43,6 +43,7 @@ const Tasks: React.FC<Props> = () => {
                         description: ''
                     }}
                     onRequestClose={() => setIsOpenTaskModal(false)}
+                    closeTaskModal={() => setIsOpenTaskModal(false)}
                 />
             </TasksStore>
 
