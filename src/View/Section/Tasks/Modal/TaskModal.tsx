@@ -38,9 +38,9 @@ const TaskModal: React.FC<Props> = withTasks(({ title, task, addTask, ...props }
      */
     const onSubmit = (event: FormEvent<HTMLFormElement>, task: ITask): void => {
         event.preventDefault();
-        if(hasError<ITask>(taskInfo)) {
-        	setIsError(true);
-        	return;
+        if (hasError<ITask>(taskInfo)) {
+            setIsError(true);
+            return;
         }
 
         setIsError(false);
@@ -122,7 +122,7 @@ const TaskModal: React.FC<Props> = withTasks(({ title, task, addTask, ...props }
                 </div>
             </div>
         </MainModal>
-    ), [props, title, isError, taskInfo]);
+    ), [props, title, isError, taskInfo, onSubmit]);
 });
 
 export default TaskModal;

@@ -7,6 +7,7 @@ import ITask from '../../Types/Tasks/Task';
 export interface TasksContextProps {
     tasks: ITask[];
     addTask: (task: ITask) => void;
+    removeTask: (id: string) => void;
 }
 
 /**
@@ -14,7 +15,8 @@ export interface TasksContextProps {
  */
 const TasksContext = createContext<TasksContextProps>({
     tasks: [],
-    addTask: () => {}
+    addTask: () => {},
+    removeTask: () => {},
 });
 
 export default TasksContext;
