@@ -37,8 +37,8 @@ const reducer: Reducer<TasksContextProps, Action> = (prevState, action): TasksCo
             return {
                 ...prevState,
                 tasks: [
-                    action.task,
-                    ...prevState.tasks
+                    ...prevState.tasks,
+                    action.task
                 ],
             };
         case TaskActions.EDIT_TASK:
