@@ -7,6 +7,7 @@ import TasksStore, { TaskActions } from '../../../Context/Tasks/TasksStore';
 import TaskList from './TaskList';
 import TaskModal from './Modal/TaskModal';
 import getItem from '../../../Helper/Storage/getItem';
+import Fade from '../../Modules/Animation/Fade';
 
 
 /**
@@ -27,11 +28,13 @@ const Tasks: React.FC<Props> = () => {
     return (
         <div className="container">
             <TasksStore
-                getDefaultProps={() => ({tasks: getItem('tasks', [])})}
+                getDefaultProps={() => ({ tasks: getItem('tasks', []) })}
             >
-                <TaskInfo
-                    setIsOpenTaskModal={setIsOpenTaskModal}
-                />
+                <Fade delay={0} className="fade-up">
+                    <TaskInfo
+                        setIsOpenTaskModal={setIsOpenTaskModal}
+                    />
+                </Fade>
                 <TaskList
                     setIsOpenTaskModal={setIsOpenTaskModal}
                 />
