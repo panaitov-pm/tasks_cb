@@ -2,6 +2,7 @@
   "name": "tasks_cb",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://panaitov-pm.github.io/tasks_cb",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
@@ -25,7 +26,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "setupFiles": [
     "./src/setupTests.js"
@@ -56,6 +59,7 @@
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
     "enzyme-to-json": "^3.4.3",
+    "gh-pages": "^2.1.1",
     "jest": "^24.9.0"
   }
 }
