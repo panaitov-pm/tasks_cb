@@ -1,7 +1,6 @@
 import React, { memo, useState } from 'react';
 import uuidV4 from 'uuid/v4';
 
-import '../../../scss/tasks.scss';
 import TaskInfo from './TaskInfo';
 import TasksStore, { TaskActions } from '../../../Context/Tasks/TasksStore';
 import TaskList from './TaskList';
@@ -26,7 +25,7 @@ const Tasks: React.FC<Props> = () => {
     const [isOpenTaskModal, setIsOpenTaskModal] = useState(false);
 
     return (
-        <div className="container">
+        <div className="container task-wrap">
             <TasksStore
                 getDefaultProps={() => ({ tasks: getItem('tasks', []) })}
             >

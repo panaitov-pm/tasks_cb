@@ -1,8 +1,4 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import CSSTransition from 'react-transition-group/CSSTransition';
-
-
-import '../../../scss/task-list.scss';
 
 import withTasks from '../../../Context/Tasks/withTasks';
 import ITask from '../../../Types/Tasks/Task';
@@ -30,13 +26,13 @@ const TaskList: React.FC<Props> = withTasks(({ tasks, setIsOpenTaskModal }): any
     return useMemo(() => (
         <main className="table">
             <Fade delay={100} className="fade-up">
-            <div className="d-flex font-weight-bold table-row">
-                <div className="table-row__column text-center">#</div>
-                <div className="table-row__column text-center" />
-                <div className="table-row__column">Name</div>
-                <div className="table-row__column flex-grow-1 text-nowrap">Description</div>
-                <div className="table-row__column text-center">Delete</div>
-            </div>
+                <div className="d-flex font-weight-bold table-row">
+                    <div className="table-row__column text-center">#</div>
+                    <div className="table-row__column text-center" />
+                    <div className="table-row__column">Name</div>
+                    <div className="table-row__column flex-grow-1 text-nowrap">Description</div>
+                    <div className="table-row__column text-center">Delete</div>
+                </div>
             </Fade>
             {
                 tasks.map((task: ITask, index: number) => (
