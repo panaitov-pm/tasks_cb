@@ -37,7 +37,7 @@ const Task: React.FC<Props> = withTasks(({ task, index, isFirstRender, removeTas
                         />
                     </div>
                     <div
-                        className="table-row__column text-nowrap overflow-hidden"
+                        className="table-row__column text-nowrap overflow-hidden table-row__name"
                         onClick={() => setIsOpenTaskModal(true)}
                     >
                         {task.name}
