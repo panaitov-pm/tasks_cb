@@ -84,6 +84,7 @@ const TaskModal: React.FC<Props> = withTasks(({ title, task, action, addTask, ed
                 </div>
                 <div className="modal-body">
                     <form
+                        autoComplete="off"
                         onSubmit={(event) => onSubmit(event, taskInfo)}
                         className={classNames('', {
                             'was-validated': isError
